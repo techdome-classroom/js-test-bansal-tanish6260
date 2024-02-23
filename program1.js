@@ -1,20 +1,19 @@
 
-class Solution {
-    public boolean isValid(String s) {
-        Stack<Character> stack = new Stack<Character>(); 
-        for (char c : s.toCharArray()) {
-            if (c == '(') 
-                stack.push(')');
-            else if (c == '{') 
-                stack.push('}');
-            else if (c == '[') 
-                stack.push(']'); 
-            else if (stack.isEmpty() || stack.pop() != c) 
-               
-                return false;
+var isValid = function(s) {
+    let stack = [];
+    for (let c of s) {
+        if (c === '(' || c === '{' || c === '[') { 
+            stack.push(c); 
+        } else { 
+            if (!stack.length || 
+                (c === ')' && stack[stack.length - 1] !== '(') || 
+                (c === '}' && stack[stack.length - 1] !== '{') ||
+                (c === ']' && stack[stack.length - 1] !== '[')) {
+                return false; 
+            }
+            stack.pop(); 
         }
-
-        return stack.isEmpty();
     }
-}
+    return !stack.length;
+};
 
